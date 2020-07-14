@@ -1,0 +1,1866 @@
+
+
+Microchip MPLAB XC8 Assembler V2.20 build 20200408173844 
+                                                                                               Tue Jul 14 11:07:29 2020
+
+Microchip MPLAB XC8 C Compiler v2.20 (Free license) build 20200408173844 Og1 
+     1                           	processor	18F45K22
+     2                           	fnconf	rparam,??,?,0
+     3                           	pagewidth 120
+     4                           	opt	flic
+     5                           	psect	idataCOMRAM,global,class=CODE,delta=1,noexec
+     6                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     7                           	psect	bitbssCOMRAM,global,bit,class=COMRAM,space=1,delta=1,lowdata,noexec
+     8                           	psect	bssCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     9                           	psect	dataCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+    10                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+    11                           	psect	text0,global,reloc=2,class=CODE,delta=1
+    12                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    13                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    14                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    15                           	psect	intcode,global,reloc=2,class=CODE,delta=1
+    16                           	psect	text5,global,reloc=2,class=CODE,delta=1
+    17                           	psect	text6,global,reloc=2,class=CODE,delta=1
+    18                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    19                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    20                           	psect	temp,global,ovrld,common,class=COMRAM,space=1,delta=1
+    21                           	psect	idloc,global,abs,ovrld,class=IDLOC,space=5,delta=1,noexec
+    22                           	psect	config,global,abs,ovrld,class=CONFIG,space=4,delta=1,noexec
+    23  0000                     
+    24                           ; Version 2.20
+    25                           ; Generated 05/05/2020 GMT
+    26                           ; 
+    27                           ; Copyright © 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    28                           ; All rights reserved.
+    29                           ; 
+    30                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    31                           ; 
+    32                           ; Redistribution and use in source and binary forms, with or without modification, are
+    33                           ; permitted provided that the following conditions are met:
+    34                           ; 
+    35                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    36                           ;        conditions and the following disclaimer.
+    37                           ; 
+    38                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    39                           ;        of conditions and the following disclaimer in the documentation and/or other
+    40                           ;        materials provided with the distribution.
+    41                           ; 
+    42                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    43                           ;        software without specific prior written permission.
+    44                           ; 
+    45                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    46                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    47                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    48                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    49                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    50                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    51                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    52                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    53                           ; 
+    54                           ; 
+    55                           ; Code-generator required, PIC18F45K22 Definitions
+    56                           ; 
+    57                           ; SFR Addresses
+    58  0000                     
+    59                           	psect	idataCOMRAM
+    60  0004E0                     __pidataCOMRAM:
+    61                           	callstack 0
+    62                           
+    63                           ;initializer for _address
+    64  0004E0  03                 	db	3
+    65  0000                     _ANSELD	set	3899
+    66  0000                     _ANSELC	set	3898
+    67  0000                     _ANSELB	set	3897
+    68  0000                     _ANSELA	set	3896
+    69  0000                     _PORTCbits	set	3970
+    70  0000                     _TXSTA1bits	set	4012
+    71  0000                     _T0CON	set	4053
+    72  0000                     _RCSTAbits	set	4011
+    73  0000                     _SPBRG	set	4015
+    74  0000                     _TXSTAbits	set	4012
+    75  0000                     _BAUDCONbits	set	4024
+    76  0000                     _ADCON0	set	4034
+    77  0000                     _ADCON1	set	4033
+    78  0000                     _ADCON2	set	4032
+    79  0000                     _TRISD	set	3989
+    80  0000                     _PORTC	set	3970
+    81  0000                     _TRISC	set	3988
+    82  0000                     _TRISB	set	3987
+    83  0000                     _PORTA	set	3968
+    84  0000                     _TRISA	set	3986
+    85  0000                     _RCREG	set	4014
+    86  0000                     _TXREG	set	4013
+    87  0000                     _ADRESL	set	4035
+    88  0000                     _ADRESH	set	4036
+    89  0000                     _PORTD	set	3971
+    90  0000                     _PORTB	set	3969
+    91  0000                     _ADCON0bits	set	4034
+    92  0000                     _TMR0IF	set	32658
+    93  0000                     _RC1IF	set	31989
+    94  0000                     _GIE	set	32663
+    95  0000                     _PEIE	set	32662
+    96  0000                     _TMR0IE	set	32661
+    97  0000                     _RCIP	set	31997
+    98  0000                     _RCIE	set	31981
+    99  0000                     _RCIF	set	31989
+   100  0000                     _TXIF	set	31988
+   101  0000                     _GODONE	set	32273
+   102                           
+   103                           ; #config settings
+   104                           
+   105                           	psect	cinit
+   106  000466                     __pcinit:
+   107                           	callstack 0
+   108  000466                     start_initialization:
+   109                           	callstack 0
+   110  000466                     __initialization:
+   111                           	callstack 0
+   112                           
+   113                           ; Initialize objects allocated to COMRAM (1 bytes)
+   114                           ; load TBLPTR registers with __pidataCOMRAM
+   115  000466  0EE0               	movlw	low __pidataCOMRAM
+   116  000468  6EF6               	movwf	tblptrl,c
+   117  00046A  0E04               	movlw	high __pidataCOMRAM
+   118  00046C  6EF7               	movwf	tblptrh,c
+   119  00046E  0E00               	movlw	low (__pidataCOMRAM shr (0+16))
+   120  000470  6EF8               	movwf	tblptru,c
+   121  000472  0009               	tblrd		*+	;fetch initializer
+   122  000474  CFF5 F048          	movff	tablat,__pdataCOMRAM
+   123                           
+   124                           ; Clear objects allocated to BITCOMRAM (1 bytes)
+   125  000478  6A47               	clrf	(__pbitbssCOMRAM/(0+8))& (0+255),c
+   126                           
+   127                           ; Clear objects allocated to COMRAM (39 bytes)
+   128  00047A  EE00  F001         	lfsr	0,__pbssCOMRAM
+   129  00047E  0E27               	movlw	39
+   130  000480                     clear_0:
+   131  000480  6AEE               	clrf	postinc0,c
+   132  000482  06E8               	decf	wreg,f,c
+   133  000484  E1FD               	bnz	clear_0
+   134  000486                     end_of_initialization:
+   135                           	callstack 0
+   136  000486                     __end_of__initialization:
+   137                           	callstack 0
+   138  000486  9049               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
+   139  000488  9249               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
+   140  00048A  0E00               	movlw	low (__Lmediumconst shr (0+16))
+   141  00048C  6EF8               	movwf	tblptru,c
+   142  00048E  0100               	movlb	0
+   143  000490  EFB3  F000         	goto	_main	;jump to C main() function
+   144                           
+   145                           	psect	bitbssCOMRAM
+   146  000238                     __pbitbssCOMRAM:
+   147                           	callstack 0
+   148  000238                     _TX_Flag:
+   149                           	callstack 0
+   150  000238                     	ds	1
+   151  000239                     _RX_Flag:
+   152                           	callstack 0
+   153  000239                     	ds	1
+   154                           
+   155                           	psect	bssCOMRAM
+   156  000001                     __pbssCOMRAM:
+   157                           	callstack 0
+   158  000001                     _RX_Buffer:
+   159                           	callstack 0
+   160  000001                     	ds	8
+   161  000009                     _tempTX_Index:
+   162                           	callstack 0
+   163  000009                     	ds	2
+   164  00000B                     _TX_Count:
+   165                           	callstack 0
+   166  00000B                     	ds	2
+   167  00000D                     _TX_Length:
+   168                           	callstack 0
+   169  00000D                     	ds	2
+   170  00000F                     _errorCode:
+   171                           	callstack 0
+   172  00000F                     	ds	2
+   173  000011                     _RX_Length:
+   174                           	callstack 0
+   175  000011                     	ds	2
+   176  000013                     _RX_Count:
+   177                           	callstack 0
+   178  000013                     	ds	2
+   179  000015                     _timeoutCount:
+   180                           	callstack 0
+   181  000015                     	ds	2
+   182  000017                     _Count2:
+   183                           	callstack 0
+   184  000017                     	ds	2
+   185  000019                     _Count:
+   186                           	callstack 0
+   187  000019                     	ds	2
+   188  00001B                     _TX_Buffer:
+   189                           	callstack 0
+   190  00001B                     	ds	13
+   191                           
+   192                           	psect	dataCOMRAM
+   193  000048                     __pdataCOMRAM:
+   194                           	callstack 0
+   195  000048                     _address:
+   196                           	callstack 0
+   197  000048                     	ds	1
+   198                           
+   199                           	psect	cstackCOMRAM
+   200  000028                     __pcstackCOMRAM:
+   201                           	callstack 0
+   202  000028                     UART_Write@data:
+   203                           	callstack 0
+   204                           
+   205                           ; 1 bytes @ 0x0
+   206  000028                     	ds	1
+   207  000029                     ??_high_priorty:
+   208                           
+   209                           ; 1 bytes @ 0x1
+   210  000029                     	ds	3
+   211  00002C                     high_priorty@i:
+   212                           	callstack 0
+   213                           
+   214                           ; 2 bytes @ 0x4
+   215  00002C                     	ds	2
+   216  00002E                     SetAnalogValue@chs:
+   217                           	callstack 0
+   218  00002E                     SetError@buf:
+   219                           	callstack 0
+   220                           
+   221                           ; 2 bytes @ 0x6
+   222  00002E                     	ds	2
+   223  000030                     ??_SetAnalogValue:
+   224  000030                     SetError@error:
+   225                           	callstack 0
+   226                           
+   227                           ; 2 bytes @ 0x8
+   228  000030                     	ds	1
+   229  000031                     SetTheData@buf:
+   230                           	callstack 0
+   231                           
+   232                           ; 2 bytes @ 0x9
+   233  000031                     	ds	1
+   234  000032                     
+   235                           ; 1 bytes @ 0xA
+   236  000032                     	ds	1
+   237  000033                     SetTheData@data_num:
+   238                           	callstack 0
+   239                           
+   240                           ; 2 bytes @ 0xB
+   241  000033                     	ds	2
+   242  000035                     SetTheData@tx_idx:
+   243                           	callstack 0
+   244                           
+   245                           ; 2 bytes @ 0xD
+   246  000035                     	ds	2
+   247  000037                     ??_SetTheData:
+   248                           
+   249                           ; 1 bytes @ 0xF
+   250  000037                     	ds	2
+   251  000039                     SetTheData@idx:
+   252                           	callstack 0
+   253                           
+   254                           ; 2 bytes @ 0x11
+   255  000039                     	ds	2
+   256  00003B                     
+   257                           ; 2 bytes @ 0x13
+   258  00003B                     	ds	2
+   259  00003D                     
+   260                           ; 3 bytes @ 0x15
+   261  00003D                     	ds	3
+   262  000040                     ??_main:
+   263                           
+   264                           ; 1 bytes @ 0x18
+   265  000040                     	ds	1
+   266  000041                     main@recDataCount:
+   267                           	callstack 0
+   268                           
+   269                           ; 2 bytes @ 0x19
+   270  000041                     	ds	2
+   271  000043                     main@rev_data:
+   272                           	callstack 0
+   273                           
+   274                           ; 2 bytes @ 0x1B
+   275  000043                     	ds	2
+   276  000045                     main@i:
+   277                           	callstack 0
+   278                           
+   279                           ; 2 bytes @ 0x1D
+   280  000045                     	ds	2
+   281                           
+   282 ;;
+   283 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   284 ;;
+   285 ;; *************** function _main *****************
+   286 ;; Defined at:
+   287 ;;		line 89 in file "newmain.c"
+   288 ;; Parameters:    Size  Location     Type
+   289 ;;  argc            2   19[COMRAM] int 
+   290 ;;  argv            3   21[COMRAM] PTR PTR unsigned char 
+   291 ;; Auto vars:     Size  Location     Type
+   292 ;;  i               2   29[COMRAM] int 
+   293 ;;  rev_data        2   27[COMRAM] int 
+   294 ;;  recDataCount    2   25[COMRAM] int 
+   295 ;; Return value:  Size  Location     Type
+   296 ;;                  2   19[COMRAM] int 
+   297 ;; Registers used:
+   298 ;;		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+   299 ;; Tracked objects:
+   300 ;;		On entry : 0/0
+   301 ;;		On exit  : 0/0
+   302 ;;		Unchanged: 0/0
+   303 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   304 ;;      Params:         5       0       0       0       0       0       0
+   305 ;;      Locals:         6       0       0       0       0       0       0
+   306 ;;      Temps:          1       0       0       0       0       0       0
+   307 ;;      Totals:        12       0       0       0       0       0       0
+   308 ;;Total ram usage:       12 bytes
+   309 ;; Hardware stack levels required when called:    4
+   310 ;; This function calls:
+   311 ;;		_SetError
+   312 ;;		_SetTheData
+   313 ;; This function is called by:
+   314 ;;		Startup code after reset
+   315 ;; This function uses a non-reentrant model
+   316 ;;
+   317                           
+   318                           	psect	text0
+   319  000166                     __ptext0:
+   320                           	callstack 0
+   321  000166                     _main:
+   322                           	callstack 27
+   323  000166                     
+   324                           ;newmain.c: 93: ANSELA = 0;
+   325  000166  0E00               	movlw	0
+   326  000168  010F               	movlb	15	; () banked
+   327  00016A  6F38               	movwf	56,b	;volatile
+   328                           
+   329                           ;newmain.c: 94: TRISA = 0x00;
+   330  00016C  0E00               	movlw	0
+   331  00016E  6E92               	movwf	146,c	;volatile
+   332                           
+   333                           ;newmain.c: 95: PORTA = 0x00;
+   334  000170  0E00               	movlw	0
+   335  000172  6E80               	movwf	128,c	;volatile
+   336                           
+   337                           ;newmain.c: 97: ANSELB = 0;
+   338  000174  0E00               	movlw	0
+   339  000176  6F39               	movwf	57,b	;volatile
+   340                           
+   341                           ;newmain.c: 98: TRISB = 0x00;
+   342  000178  0E00               	movlw	0
+   343  00017A  6E93               	movwf	147,c	;volatile
+   344                           
+   345                           ;newmain.c: 99: PORTB = 0x00;
+   346  00017C  0E00               	movlw	0
+   347  00017E  6E81               	movwf	129,c	;volatile
+   348                           
+   349                           ;newmain.c: 101: ANSELC = 0;
+   350  000180  0E00               	movlw	0
+   351  000182  6F3A               	movwf	58,b	;volatile
+   352                           
+   353                           ;newmain.c: 102: TRISC = 0xDF;
+   354  000184  0EDF               	movlw	223
+   355  000186  6E94               	movwf	148,c	;volatile
+   356                           
+   357                           ;newmain.c: 103: PORTC = 0;
+   358  000188  0E00               	movlw	0
+   359  00018A  6E82               	movwf	130,c	;volatile
+   360                           
+   361                           ;newmain.c: 105: ANSELD = 0;
+   362  00018C  0E00               	movlw	0
+   363  00018E  6F3B               	movwf	59,b	;volatile
+   364                           
+   365                           ;newmain.c: 106: TRISD = 0x00;
+   366  000190  0E00               	movlw	0
+   367  000192  6E95               	movwf	149,c	;volatile
+   368                           
+   369                           ;newmain.c: 107: PORTD = 0x00;
+   370  000194  0E00               	movlw	0
+   371  000196  6E83               	movwf	131,c	;volatile
+   372                           
+   373                           ;newmain.c: 109: ADCON2 = 0xA1;
+   374  000198  0EA1               	movlw	161
+   375  00019A  6EC0               	movwf	192,c	;volatile
+   376                           
+   377                           ;newmain.c: 110: ADCON1 = 0x00;
+   378  00019C  0E00               	movlw	0
+   379  00019E  6EC1               	movwf	193,c	;volatile
+   380                           
+   381                           ;newmain.c: 112: ADCON0 = 0x03;
+   382  0001A0  0E03               	movlw	3
+   383  0001A2  6EC2               	movwf	194,c	;volatile
+   384  0001A4                     
+   385                           ; BSR set to: 15
+   386                           ;newmain.c: 114: BAUDCONbits.BRG16 = 0;
+   387  0001A4  96B8               	bcf	184,3,c	;volatile
+   388  0001A6                     
+   389                           ; BSR set to: 15
+   390                           ;newmain.c: 115: TXSTAbits.BRGH = 0;
+   391  0001A6  94AC               	bcf	172,2,c	;volatile
+   392                           
+   393                           ;newmain.c: 116: SPBRG = 12 ;
+   394  0001A8  0E0C               	movlw	12
+   395  0001AA  6EAF               	movwf	175,c	;volatile
+   396  0001AC                     
+   397                           ; BSR set to: 15
+   398                           ;newmain.c: 117: TXSTAbits.TXEN = 1;
+   399  0001AC  8AAC               	bsf	172,5,c	;volatile
+   400  0001AE                     
+   401                           ; BSR set to: 15
+   402                           ;newmain.c: 118: RCSTAbits.CREN = 1;
+   403  0001AE  88AB               	bsf	171,4,c	;volatile
+   404  0001B0                     
+   405                           ; BSR set to: 15
+   406                           ;newmain.c: 119: TXSTAbits.SYNC = 0;
+   407  0001B0  98AC               	bcf	172,4,c	;volatile
+   408  0001B2                     
+   409                           ; BSR set to: 15
+   410                           ;newmain.c: 120: RCSTAbits.SPEN = 1;
+   411  0001B2  8EAB               	bsf	171,7,c	;volatile
+   412  0001B4                     
+   413                           ; BSR set to: 15
+   414                           ;newmain.c: 122: RCIE = 1;
+   415  0001B4  8A9D               	bsf	3997,5,c	;volatile
+   416  0001B6                     
+   417                           ; BSR set to: 15
+   418                           ;newmain.c: 123: RCIP = 1;
+   419  0001B6  8A9F               	bsf	3999,5,c	;volatile
+   420                           
+   421                           ;newmain.c: 125: T0CON = 0xC3;
+   422  0001B8  0EC3               	movlw	195
+   423  0001BA  6ED5               	movwf	213,c	;volatile
+   424  0001BC                     
+   425                           ; BSR set to: 15
+   426                           ;newmain.c: 126: TMR0IE = 1;
+   427  0001BC  8AF2               	bsf	4082,5,c	;volatile
+   428  0001BE                     
+   429                           ; BSR set to: 15
+   430                           ;newmain.c: 127: PEIE = 1;
+   431  0001BE  8CF2               	bsf	4082,6,c	;volatile
+   432  0001C0                     
+   433                           ; BSR set to: 15
+   434                           ;newmain.c: 128: GIE = 1;
+   435  0001C0  8EF2               	bsf	4082,7,c	;volatile
+   436  0001C2                     l1229:
+   437                           
+   438                           ;newmain.c: 131: if (RX_Flag) {
+   439  0001C2  A247               	btfss	(_RX_Flag/(0+8))^0,_RX_Flag& (0+7),c
+   440  0001C4  EFE6  F000         	goto	u241
+   441  0001C8  EFE8  F000         	goto	u240
+   442  0001CC                     u241:
+   443  0001CC  EFE1  F000         	goto	l1229
+   444  0001D0                     u240:
+   445  0001D0                     
+   446                           ;newmain.c: 133: RX_Flag = 0;
+   447  0001D0  9247               	bcf	(_RX_Flag/(0+8))^0,_RX_Flag& (0+7),c
+   448  0001D2                     
+   449                           ;newmain.c: 134: TX_Buffer[0] = 0x03;
+   450  0001D2  0E03               	movlw	3
+   451  0001D4  6E1B               	movwf	_TX_Buffer^0,c
+   452  0001D6                     
+   453                           ;newmain.c: 136: if(errorCode == 0){
+   454  0001D6  500F               	movf	_errorCode^0,w,c
+   455  0001D8  1010               	iorwf	(_errorCode+1)^0,w,c
+   456  0001DA  A4D8               	btfss	status,2,c
+   457  0001DC  EFF2  F000         	goto	u251
+   458  0001E0  EFF4  F000         	goto	u250
+   459  0001E4                     u251:
+   460  0001E4  EF46  F001         	goto	l1263
+   461  0001E8                     u250:
+   462  0001E8                     
+   463                           ;newmain.c: 138: int recDataCount = (int)RX_Buffer[5];
+   464  0001E8  C006  F041         	movff	_RX_Buffer+5,main@recDataCount
+   465  0001EC  6A42               	clrf	(main@recDataCount+1)^0,c
+   466  0001EE                     
+   467                           ;newmain.c: 139: int rev_data = (int)RX_Buffer[3];
+   468  0001EE  C004  F043         	movff	_RX_Buffer+3,main@rev_data
+   469  0001F2  6A44               	clrf	(main@rev_data+1)^0,c
+   470                           
+   471                           ;newmain.c: 140: tempTX_Index = 3;
+   472  0001F4  0E00               	movlw	0
+   473  0001F6  6E0A               	movwf	(_tempTX_Index+1)^0,c
+   474  0001F8  0E03               	movlw	3
+   475  0001FA  6E09               	movwf	_tempTX_Index^0,c
+   476  0001FC                     
+   477                           ;newmain.c: 141: TX_Buffer[1] = RX_Buffer[1];
+   478  0001FC  C002  F01C         	movff	_RX_Buffer+1,_TX_Buffer+1
+   479  000200                     
+   480                           ;newmain.c: 142: TX_Buffer[2] = (int)(RX_Buffer[5] << 1);
+   481  000200  5006               	movf	(_RX_Buffer+5)^0,w,c
+   482  000202  2406               	addwf	(_RX_Buffer+5)^0,w,c
+   483  000204  6E1D               	movwf	(_TX_Buffer+2)^0,c
+   484  000206                     
+   485                           ;newmain.c: 144: for(i = 0; i < recDataCount; i++){
+   486  000206  0E00               	movlw	0
+   487  000208  6E46               	movwf	(main@i+1)^0,c
+   488  00020A  0E00               	movlw	0
+   489  00020C  6E45               	movwf	main@i^0,c
+   490  00020E  EF21  F001         	goto	l1255
+   491  000212                     l1249:
+   492                           
+   493                           ;newmain.c: 145: SetTheData(TX_Buffer, i + rev_data, tempTX_Index);
+   494  000212  0E1B               	movlw	low _TX_Buffer
+   495  000214  6E31               	movwf	SetTheData@buf^0,c
+   496  000216  0E00               	movlw	high _TX_Buffer
+   497  000218  6E32               	movwf	(SetTheData@buf+1)^0,c
+   498  00021A  5043               	movf	main@rev_data^0,w,c
+   499  00021C  2445               	addwf	main@i^0,w,c
+   500  00021E  6E33               	movwf	SetTheData@data_num^0,c
+   501  000220  5044               	movf	(main@rev_data+1)^0,w,c
+   502  000222  2046               	addwfc	(main@i+1)^0,w,c
+   503  000224  6E34               	movwf	(SetTheData@data_num+1)^0,c
+   504  000226  C009  F035         	movff	_tempTX_Index,SetTheData@tx_idx
+   505  00022A  C00A  F036         	movff	_tempTX_Index+1,SetTheData@tx_idx+1
+   506  00022E  ECE6  F001         	call	_SetTheData	;wreg free
+   507  000232                     
+   508                           ;newmain.c: 146: tempTX_Index = tempTX_Index + 2;
+   509  000232  0E02               	movlw	2
+   510  000234  2409               	addwf	_tempTX_Index^0,w,c
+   511  000236  6E09               	movwf	_tempTX_Index^0,c
+   512  000238  0E00               	movlw	0
+   513  00023A  200A               	addwfc	(_tempTX_Index+1)^0,w,c
+   514  00023C  6E0A               	movwf	(_tempTX_Index+1)^0,c
+   515  00023E  4A45               	infsnz	main@i^0,f,c
+   516  000240  2A46               	incf	(main@i+1)^0,f,c
+   517  000242                     l1255:
+   518  000242  5041               	movf	main@recDataCount^0,w,c
+   519  000244  5C45               	subwf	main@i^0,w,c
+   520  000246  5046               	movf	(main@i+1)^0,w,c
+   521  000248  0A80               	xorlw	128
+   522  00024A  6E40               	movwf	??_main^0,c
+   523  00024C  5042               	movf	(main@recDataCount+1)^0,w,c
+   524  00024E  0A80               	xorlw	128
+   525  000250  5840               	subwfb	??_main^0,w,c
+   526  000252  A0D8               	btfss	status,0,c
+   527  000254  EF2E  F001         	goto	u261
+   528  000258  EF30  F001         	goto	u260
+   529  00025C                     u261:
+   530  00025C  EF09  F001         	goto	l1249
+   531  000260                     u260:
+   532  000260                     
+   533                           ;newmain.c: 147: };newmain.c: 148: TX_Buffer[tempTX_Index++] = 0x49;
+   534  000260  0E1B               	movlw	low _TX_Buffer
+   535  000262  2409               	addwf	_tempTX_Index^0,w,c
+   536  000264  6ED9               	movwf	fsr2l,c
+   537  000266  0E00               	movlw	high _TX_Buffer
+   538  000268  200A               	addwfc	(_tempTX_Index+1)^0,w,c
+   539  00026A  6EDA               	movwf	fsr2h,c
+   540  00026C  0E49               	movlw	73
+   541  00026E  6EDF               	movwf	indf2,c
+   542  000270  4A09               	infsnz	_tempTX_Index^0,f,c
+   543  000272  2A0A               	incf	(_tempTX_Index+1)^0,f,c
+   544  000274                     
+   545                           ;newmain.c: 149: TX_Buffer[tempTX_Index++] = 0xAD;
+   546  000274  0E1B               	movlw	low _TX_Buffer
+   547  000276  2409               	addwf	_tempTX_Index^0,w,c
+   548  000278  6ED9               	movwf	fsr2l,c
+   549  00027A  0E00               	movlw	high _TX_Buffer
+   550  00027C  200A               	addwfc	(_tempTX_Index+1)^0,w,c
+   551  00027E  6EDA               	movwf	fsr2h,c
+   552  000280  0EAD               	movlw	173
+   553  000282  6EDF               	movwf	indf2,c
+   554  000284  4A09               	infsnz	_tempTX_Index^0,f,c
+   555  000286  2A0A               	incf	(_tempTX_Index+1)^0,f,c
+   556                           
+   557                           ;newmain.c: 150: }
+   558  000288  EF6F  F001         	goto	l1271
+   559  00028C                     l1263:
+   560                           
+   561                           ;newmain.c: 151: else if(errorCode == 1)
+   562  00028C  040F               	decf	_errorCode^0,w,c
+   563  00028E  1010               	iorwf	(_errorCode+1)^0,w,c
+   564  000290  A4D8               	btfss	status,2,c
+   565  000292  EF4D  F001         	goto	u271
+   566  000296  EF4F  F001         	goto	u270
+   567  00029A                     u271:
+   568  00029A  EF5B  F001         	goto	l1267
+   569  00029E                     u270:
+   570  00029E                     
+   571                           ;newmain.c: 152: SetError(TX_Buffer, 1);
+   572  00029E  0E1B               	movlw	low _TX_Buffer
+   573  0002A0  6E2E               	movwf	SetError@buf^0,c
+   574  0002A2  0E00               	movlw	high _TX_Buffer
+   575  0002A4  6E2F               	movwf	(SetError@buf+1)^0,c
+   576  0002A6  0E00               	movlw	0
+   577  0002A8  6E31               	movwf	(SetError@error+1)^0,c
+   578  0002AA  0E01               	movlw	1
+   579  0002AC  6E30               	movwf	SetError@error^0,c
+   580  0002AE  EC78  F001         	call	_SetError	;wreg free
+   581  0002B2  EF6F  F001         	goto	l1271
+   582  0002B6                     l1267:
+   583                           
+   584                           ;newmain.c: 153: else if(errorCode == 2)
+   585  0002B6  0E02               	movlw	2
+   586  0002B8  180F               	xorwf	_errorCode^0,w,c
+   587  0002BA  1010               	iorwf	(_errorCode+1)^0,w,c
+   588  0002BC  A4D8               	btfss	status,2,c
+   589  0002BE  EF63  F001         	goto	u281
+   590  0002C2  EF65  F001         	goto	u280
+   591  0002C6                     u281:
+   592  0002C6  EF6F  F001         	goto	l1271
+   593  0002CA                     u280:
+   594  0002CA                     
+   595                           ;newmain.c: 154: SetError(TX_Buffer, 2);
+   596  0002CA  0E1B               	movlw	low _TX_Buffer
+   597  0002CC  6E2E               	movwf	SetError@buf^0,c
+   598  0002CE  0E00               	movlw	high _TX_Buffer
+   599  0002D0  6E2F               	movwf	(SetError@buf+1)^0,c
+   600  0002D2  0E00               	movlw	0
+   601  0002D4  6E31               	movwf	(SetError@error+1)^0,c
+   602  0002D6  0E02               	movlw	2
+   603  0002D8  6E30               	movwf	SetError@error^0,c
+   604  0002DA  EC78  F001         	call	_SetError	;wreg free
+   605  0002DE                     l1271:
+   606                           
+   607                           ;newmain.c: 155: TX_Length = tempTX_Index;
+   608  0002DE  C009  F00D         	movff	_tempTX_Index,_TX_Length
+   609  0002E2  C00A  F00E         	movff	_tempTX_Index+1,_TX_Length+1
+   610  0002E6                     
+   611                           ;newmain.c: 156: TX_Flag = 1;
+   612  0002E6  8047               	bsf	(_TX_Flag/(0+8))^0,_TX_Flag& (0+7),c
+   613  0002E8  EFE1  F000         	goto	l1229
+   614  0002EC  EFB1  F000         	goto	start
+   615  0002F0                     __end_of_main:
+   616                           	callstack 0
+   617                           
+   618 ;; *************** function _SetTheData *****************
+   619 ;; Defined at:
+   620 ;;		line 37 in file "newmain.c"
+   621 ;; Parameters:    Size  Location     Type
+   622 ;;  buf             2    9[COMRAM] PTR unsigned char 
+   623 ;;		 -> TX_Buffer(13), 
+   624 ;;  data_num        2   11[COMRAM] int 
+   625 ;;  tx_idx          2   13[COMRAM] int 
+   626 ;; Auto vars:     Size  Location     Type
+   627 ;;  idx             2   17[COMRAM] int 
+   628 ;; Return value:  Size  Location     Type
+   629 ;;                  1    wreg      void 
+   630 ;; Registers used:
+   631 ;;		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+   632 ;; Tracked objects:
+   633 ;;		On entry : 0/0
+   634 ;;		On exit  : 0/0
+   635 ;;		Unchanged: 0/0
+   636 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   637 ;;      Params:         6       0       0       0       0       0       0
+   638 ;;      Locals:         2       0       0       0       0       0       0
+   639 ;;      Temps:          2       0       0       0       0       0       0
+   640 ;;      Totals:        10       0       0       0       0       0       0
+   641 ;;Total ram usage:       10 bytes
+   642 ;; Hardware stack levels used:    1
+   643 ;; Hardware stack levels required when called:    3
+   644 ;; This function calls:
+   645 ;;		_SetAnalogValue
+   646 ;; This function is called by:
+   647 ;;		_main
+   648 ;; This function uses a non-reentrant model
+   649 ;;
+   650                           
+   651                           	psect	text1
+   652  0003CC                     __ptext1:
+   653                           	callstack 0
+   654  0003CC                     _SetTheData:
+   655                           	callstack 27
+   656  0003CC                     
+   657                           ;newmain.c: 38: int idx = tx_idx;
+   658  0003CC  C035  F039         	movff	SetTheData@tx_idx,SetTheData@idx
+   659  0003D0  C036  F03A         	movff	SetTheData@tx_idx+1,SetTheData@idx+1
+   660                           
+   661                           ;newmain.c: 40: switch(data_num){
+   662  0003D4  EF20  F002         	goto	l1159
+   663  0003D8                     l1141:
+   664                           
+   665                           ;newmain.c: 42: TX_Buffer[idx++] = PORTB;
+   666  0003D8  0E1B               	movlw	low _TX_Buffer
+   667  0003DA  2439               	addwf	SetTheData@idx^0,w,c
+   668  0003DC  6ED9               	movwf	fsr2l,c
+   669  0003DE  0E00               	movlw	high _TX_Buffer
+   670  0003E0  203A               	addwfc	(SetTheData@idx+1)^0,w,c
+   671  0003E2  6EDA               	movwf	fsr2h,c
+   672  0003E4  CF81 FFDF          	movff	3969,indf2	;volatile
+   673  0003E8  4A39               	infsnz	SetTheData@idx^0,f,c
+   674  0003EA  2A3A               	incf	(SetTheData@idx+1)^0,f,c
+   675  0003EC                     
+   676                           ;newmain.c: 43: TX_Buffer[idx++] = PORTD;
+   677  0003EC  0E1B               	movlw	low _TX_Buffer
+   678  0003EE  2439               	addwf	SetTheData@idx^0,w,c
+   679  0003F0  6ED9               	movwf	fsr2l,c
+   680  0003F2  0E00               	movlw	high _TX_Buffer
+   681  0003F4  203A               	addwfc	(SetTheData@idx+1)^0,w,c
+   682  0003F6  6EDA               	movwf	fsr2h,c
+   683  0003F8  CF83 FFDF          	movff	3971,indf2	;volatile
+   684  0003FC  4A39               	infsnz	SetTheData@idx^0,f,c
+   685  0003FE  2A3A               	incf	(SetTheData@idx+1)^0,f,c
+   686                           
+   687                           ;newmain.c: 44: break;
+   688  000400  EF32  F002         	goto	l115
+   689  000404                     l1147:
+   690                           
+   691                           ;newmain.c: 47: SetAnalogValue(data_num - 1);
+   692  000404  0EFF               	movlw	255
+   693  000406  2433               	addwf	SetTheData@data_num^0,w,c
+   694  000408  6E2E               	movwf	SetAnalogValue@chs^0,c
+   695  00040A  0EFF               	movlw	255
+   696  00040C  2034               	addwfc	(SetTheData@data_num+1)^0,w,c
+   697  00040E  6E2F               	movwf	(SetAnalogValue@chs+1)^0,c
+   698  000410  EC4A  F002         	call	_SetAnalogValue	;wreg free
+   699  000414                     
+   700                           ;newmain.c: 48: TX_Buffer[idx++] = ADRESH;
+   701  000414  0E1B               	movlw	low _TX_Buffer
+   702  000416  2439               	addwf	SetTheData@idx^0,w,c
+   703  000418  6ED9               	movwf	fsr2l,c
+   704  00041A  0E00               	movlw	high _TX_Buffer
+   705  00041C  203A               	addwfc	(SetTheData@idx+1)^0,w,c
+   706  00041E  6EDA               	movwf	fsr2h,c
+   707  000420  CFC4 FFDF          	movff	4036,indf2	;volatile
+   708  000424  4A39               	infsnz	SetTheData@idx^0,f,c
+   709  000426  2A3A               	incf	(SetTheData@idx+1)^0,f,c
+   710  000428                     
+   711                           ;newmain.c: 49: TX_Buffer[idx++] = ADRESL;
+   712  000428  0E1B               	movlw	low _TX_Buffer
+   713  00042A  2439               	addwf	SetTheData@idx^0,w,c
+   714  00042C  6ED9               	movwf	fsr2l,c
+   715  00042E  0E00               	movlw	high _TX_Buffer
+   716  000430  203A               	addwfc	(SetTheData@idx+1)^0,w,c
+   717  000432  6EDA               	movwf	fsr2h,c
+   718  000434  CFC3 FFDF          	movff	4035,indf2	;volatile
+   719  000438  4A39               	infsnz	SetTheData@idx^0,f,c
+   720  00043A  2A3A               	incf	(SetTheData@idx+1)^0,f,c
+   721                           
+   722                           ;newmain.c: 50: break;
+   723  00043C  EF32  F002         	goto	l115
+   724  000440                     l1159:
+   725  000440  C033  F037         	movff	SetTheData@data_num,??_SetTheData
+   726  000444  C034  F038         	movff	SetTheData@data_num+1,??_SetTheData+1
+   727                           
+   728                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+      +                          itches
+   729                           ; Switch size 1, requested type "simple"
+   730                           ; Number of cases is 1, Range of values is 0 to 0
+   731                           ; switch strategies available:
+   732                           ; Name         Instructions Cycles
+   733                           ; simple_byte            4     3 (average)
+   734                           ;	Chosen strategy is simple_byte
+   735  000448  5038               	movf	(??_SetTheData+1)^0,w,c
+   736  00044A  0A00               	xorlw	0	; case 0
+   737  00044C  B4D8               	btfsc	status,2,c
+   738  00044E  EF2B  F002         	goto	l1295
+   739  000452  EF02  F002         	goto	l1147
+   740  000456                     l1295:
+   741                           
+   742                           ; Switch size 1, requested type "simple"
+   743                           ; Number of cases is 1, Range of values is 0 to 0
+   744                           ; switch strategies available:
+   745                           ; Name         Instructions Cycles
+   746                           ; simple_byte            4     3 (average)
+   747                           ;	Chosen strategy is simple_byte
+   748  000456  5037               	movf	??_SetTheData^0,w,c
+   749  000458  0A00               	xorlw	0	; case 0
+   750  00045A  B4D8               	btfsc	status,2,c
+   751  00045C  EFEC  F001         	goto	l1141
+   752  000460  EF02  F002         	goto	l1147
+   753  000464                     l115:
+   754  000464  0012               	return		;funcret
+   755  000466                     __end_of_SetTheData:
+   756                           	callstack 0
+   757                           
+   758 ;; *************** function _SetAnalogValue *****************
+   759 ;; Defined at:
+   760 ;;		line 31 in file "newmain.c"
+   761 ;; Parameters:    Size  Location     Type
+   762 ;;  chs             2    6[COMRAM] int 
+   763 ;; Auto vars:     Size  Location     Type
+   764 ;;		None
+   765 ;; Return value:  Size  Location     Type
+   766 ;;                  1    wreg      void 
+   767 ;; Registers used:
+   768 ;;		wreg, status,2, status,0
+   769 ;; Tracked objects:
+   770 ;;		On entry : 0/0
+   771 ;;		On exit  : 0/0
+   772 ;;		Unchanged: 0/0
+   773 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   774 ;;      Params:         2       0       0       0       0       0       0
+   775 ;;      Locals:         0       0       0       0       0       0       0
+   776 ;;      Temps:          1       0       0       0       0       0       0
+   777 ;;      Totals:         3       0       0       0       0       0       0
+   778 ;;Total ram usage:        3 bytes
+   779 ;; Hardware stack levels used:    1
+   780 ;; Hardware stack levels required when called:    2
+   781 ;; This function calls:
+   782 ;;		Nothing
+   783 ;; This function is called by:
+   784 ;;		_SetTheData
+   785 ;; This function uses a non-reentrant model
+   786 ;;
+   787                           
+   788                           	psect	text2
+   789  000494                     __ptext2:
+   790                           	callstack 0
+   791  000494                     _SetAnalogValue:
+   792                           	callstack 27
+   793  000494                     
+   794                           ;newmain.c: 32: ADCON0bits.CHS = chs;
+   795  000494  C02E  F030         	movff	SetAnalogValue@chs,??_SetAnalogValue
+   796  000498  4630               	rlncf	??_SetAnalogValue^0,f,c
+   797  00049A  4630               	rlncf	??_SetAnalogValue^0,f,c
+   798  00049C  50C2               	movf	194,w,c	;volatile
+   799  00049E  1830               	xorwf	??_SetAnalogValue^0,w,c
+   800  0004A0  0B83               	andlw	-125
+   801  0004A2  1830               	xorwf	??_SetAnalogValue^0,w,c
+   802  0004A4  6EC2               	movwf	194,c	;volatile
+   803  0004A6                     
+   804                           ;newmain.c: 33: GODONE = 1;
+   805  0004A6  82C2               	bsf	4034,1,c	;volatile
+   806  0004A8                     l105:
+   807  0004A8  B2C2               	btfsc	4034,1,c	;volatile
+   808  0004AA  EF59  F002         	goto	u211
+   809  0004AE  EF5B  F002         	goto	u210
+   810  0004B2                     u211:
+   811  0004B2  EF54  F002         	goto	l105
+   812  0004B6                     u210:
+   813  0004B6  0012               	return		;funcret
+   814  0004B8                     __end_of_SetAnalogValue:
+   815                           	callstack 0
+   816                           
+   817 ;; *************** function _SetError *****************
+   818 ;; Defined at:
+   819 ;;		line 69 in file "newmain.c"
+   820 ;; Parameters:    Size  Location     Type
+   821 ;;  buf             2    6[COMRAM] PTR unsigned char 
+   822 ;;		 -> TX_Buffer(13), 
+   823 ;;  error           2    8[COMRAM] int 
+   824 ;; Auto vars:     Size  Location     Type
+   825 ;;		None
+   826 ;; Return value:  Size  Location     Type
+   827 ;;                  1    wreg      void 
+   828 ;; Registers used:
+   829 ;;		wreg, fsr2l, fsr2h, status,2, status,0
+   830 ;; Tracked objects:
+   831 ;;		On entry : 0/0
+   832 ;;		On exit  : 0/0
+   833 ;;		Unchanged: 0/0
+   834 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   835 ;;      Params:         4       0       0       0       0       0       0
+   836 ;;      Locals:         0       0       0       0       0       0       0
+   837 ;;      Temps:          0       0       0       0       0       0       0
+   838 ;;      Totals:         4       0       0       0       0       0       0
+   839 ;;Total ram usage:        4 bytes
+   840 ;; Hardware stack levels used:    1
+   841 ;; Hardware stack levels required when called:    2
+   842 ;; This function calls:
+   843 ;;		Nothing
+   844 ;; This function is called by:
+   845 ;;		_main
+   846 ;; This function uses a non-reentrant model
+   847 ;;
+   848                           
+   849                           	psect	text3
+   850  0002F0                     __ptext3:
+   851                           	callstack 0
+   852  0002F0                     _SetError:
+   853                           	callstack 28
+   854  0002F0                     
+   855                           ;newmain.c: 70: if(error == 1){
+   856  0002F0  0430               	decf	SetError@error^0,w,c
+   857  0002F2  1031               	iorwf	(SetError@error+1)^0,w,c
+   858  0002F4  A4D8               	btfss	status,2,c
+   859  0002F6  EF7F  F001         	goto	u221
+   860  0002FA  EF81  F001         	goto	u220
+   861  0002FE                     u221:
+   862  0002FE  EFAF  F001         	goto	l1185
+   863  000302                     u220:
+   864  000302                     
+   865                           ;newmain.c: 71: tempTX_Index = 1;
+   866  000302  0E00               	movlw	0
+   867  000304  6E0A               	movwf	(_tempTX_Index+1)^0,c
+   868  000306  0E01               	movlw	1
+   869  000308  6E09               	movwf	_tempTX_Index^0,c
+   870  00030A                     
+   871                           ;newmain.c: 72: buf[tempTX_Index++] = 0x83;
+   872  00030A  5009               	movf	_tempTX_Index^0,w,c
+   873  00030C  242E               	addwf	SetError@buf^0,w,c
+   874  00030E  6ED9               	movwf	fsr2l,c
+   875  000310  500A               	movf	(_tempTX_Index+1)^0,w,c
+   876  000312  202F               	addwfc	(SetError@buf+1)^0,w,c
+   877  000314  6EDA               	movwf	fsr2h,c
+   878  000316  0E83               	movlw	131
+   879  000318  6EDF               	movwf	indf2,c
+   880  00031A  4A09               	infsnz	_tempTX_Index^0,f,c
+   881  00031C  2A0A               	incf	(_tempTX_Index+1)^0,f,c
+   882  00031E                     
+   883                           ;newmain.c: 73: buf[tempTX_Index++] = 0x01;
+   884  00031E  5009               	movf	_tempTX_Index^0,w,c
+   885  000320  242E               	addwf	SetError@buf^0,w,c
+   886  000322  6ED9               	movwf	fsr2l,c
+   887  000324  500A               	movf	(_tempTX_Index+1)^0,w,c
+   888  000326  202F               	addwfc	(SetError@buf+1)^0,w,c
+   889  000328  6EDA               	movwf	fsr2h,c
+   890  00032A  0E01               	movlw	1
+   891  00032C  6EDF               	movwf	indf2,c
+   892  00032E  4A09               	infsnz	_tempTX_Index^0,f,c
+   893  000330  2A0A               	incf	(_tempTX_Index+1)^0,f,c
+   894  000332                     
+   895                           ;newmain.c: 74: buf[tempTX_Index++] = 0xAC;
+   896  000332  5009               	movf	_tempTX_Index^0,w,c
+   897  000334  242E               	addwf	SetError@buf^0,w,c
+   898  000336  6ED9               	movwf	fsr2l,c
+   899  000338  500A               	movf	(_tempTX_Index+1)^0,w,c
+   900  00033A  202F               	addwfc	(SetError@buf+1)^0,w,c
+   901  00033C  6EDA               	movwf	fsr2h,c
+   902  00033E  0EAC               	movlw	172
+   903  000340  6EDF               	movwf	indf2,c
+   904  000342  4A09               	infsnz	_tempTX_Index^0,f,c
+   905  000344  2A0A               	incf	(_tempTX_Index+1)^0,f,c
+   906  000346                     
+   907                           ;newmain.c: 75: buf[tempTX_Index++] = 0x63;
+   908  000346  5009               	movf	_tempTX_Index^0,w,c
+   909  000348  242E               	addwf	SetError@buf^0,w,c
+   910  00034A  6ED9               	movwf	fsr2l,c
+   911  00034C  500A               	movf	(_tempTX_Index+1)^0,w,c
+   912  00034E  202F               	addwfc	(SetError@buf+1)^0,w,c
+   913  000350  6EDA               	movwf	fsr2h,c
+   914  000352  0E63               	movlw	99
+   915  000354  6EDF               	movwf	indf2,c
+   916  000356                     l1183:
+   917  000356  4A09               	infsnz	_tempTX_Index^0,f,c
+   918  000358  2A0A               	incf	(_tempTX_Index+1)^0,f,c
+   919                           
+   920                           ;newmain.c: 76: }
+   921  00035A  EFE5  F001         	goto	l133
+   922  00035E                     l1185:
+   923                           
+   924                           ;newmain.c: 77: else if(error == 2){
+   925  00035E  0E02               	movlw	2
+   926  000360  1830               	xorwf	SetError@error^0,w,c
+   927  000362  1031               	iorwf	(SetError@error+1)^0,w,c
+   928  000364  A4D8               	btfss	status,2,c
+   929  000366  EFB7  F001         	goto	u231
+   930  00036A  EFB9  F001         	goto	u230
+   931  00036E                     u231:
+   932  00036E  EFE5  F001         	goto	l133
+   933  000372                     u230:
+   934  000372                     
+   935                           ;newmain.c: 78: tempTX_Index = 1;
+   936  000372  0E00               	movlw	0
+   937  000374  6E0A               	movwf	(_tempTX_Index+1)^0,c
+   938  000376  0E01               	movlw	1
+   939  000378  6E09               	movwf	_tempTX_Index^0,c
+   940  00037A                     
+   941                           ;newmain.c: 79: buf[tempTX_Index++] = 0x83;
+   942  00037A  5009               	movf	_tempTX_Index^0,w,c
+   943  00037C  242E               	addwf	SetError@buf^0,w,c
+   944  00037E  6ED9               	movwf	fsr2l,c
+   945  000380  500A               	movf	(_tempTX_Index+1)^0,w,c
+   946  000382  202F               	addwfc	(SetError@buf+1)^0,w,c
+   947  000384  6EDA               	movwf	fsr2h,c
+   948  000386  0E83               	movlw	131
+   949  000388  6EDF               	movwf	indf2,c
+   950  00038A  4A09               	infsnz	_tempTX_Index^0,f,c
+   951  00038C  2A0A               	incf	(_tempTX_Index+1)^0,f,c
+   952  00038E                     
+   953                           ;newmain.c: 80: buf[tempTX_Index++] = 0x02;
+   954  00038E  5009               	movf	_tempTX_Index^0,w,c
+   955  000390  242E               	addwf	SetError@buf^0,w,c
+   956  000392  6ED9               	movwf	fsr2l,c
+   957  000394  500A               	movf	(_tempTX_Index+1)^0,w,c
+   958  000396  202F               	addwfc	(SetError@buf+1)^0,w,c
+   959  000398  6EDA               	movwf	fsr2h,c
+   960  00039A  0E02               	movlw	2
+   961  00039C  6EDF               	movwf	indf2,c
+   962  00039E  4A09               	infsnz	_tempTX_Index^0,f,c
+   963  0003A0  2A0A               	incf	(_tempTX_Index+1)^0,f,c
+   964  0003A2                     
+   965                           ;newmain.c: 81: buf[tempTX_Index++] = 0xB0;
+   966  0003A2  5009               	movf	_tempTX_Index^0,w,c
+   967  0003A4  242E               	addwf	SetError@buf^0,w,c
+   968  0003A6  6ED9               	movwf	fsr2l,c
+   969  0003A8  500A               	movf	(_tempTX_Index+1)^0,w,c
+   970  0003AA  202F               	addwfc	(SetError@buf+1)^0,w,c
+   971  0003AC  6EDA               	movwf	fsr2h,c
+   972  0003AE  0EB0               	movlw	176
+   973  0003B0  6EDF               	movwf	indf2,c
+   974  0003B2  4A09               	infsnz	_tempTX_Index^0,f,c
+   975  0003B4  2A0A               	incf	(_tempTX_Index+1)^0,f,c
+   976  0003B6                     
+   977                           ;newmain.c: 82: buf[tempTX_Index++] = 0x53;
+   978  0003B6  5009               	movf	_tempTX_Index^0,w,c
+   979  0003B8  242E               	addwf	SetError@buf^0,w,c
+   980  0003BA  6ED9               	movwf	fsr2l,c
+   981  0003BC  500A               	movf	(_tempTX_Index+1)^0,w,c
+   982  0003BE  202F               	addwfc	(SetError@buf+1)^0,w,c
+   983  0003C0  6EDA               	movwf	fsr2h,c
+   984  0003C2  0E53               	movlw	83
+   985  0003C4  6EDF               	movwf	indf2,c
+   986  0003C6  EFAB  F001         	goto	l1183
+   987  0003CA                     l133:
+   988  0003CA  0012               	return		;funcret
+   989  0003CC                     __end_of_SetError:
+   990                           	callstack 0
+   991                           
+   992 ;; *************** function _high_priorty *****************
+   993 ;; Defined at:
+   994 ;;		line 166 in file "newmain.c"
+   995 ;; Parameters:    Size  Location     Type
+   996 ;;		None
+   997 ;; Auto vars:     Size  Location     Type
+   998 ;;  i               2    4[COMRAM] int 
+   999 ;; Return value:  Size  Location     Type
+  1000 ;;                  1    wreg      void 
+  1001 ;; Registers used:
+  1002 ;;		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+  1003 ;; Tracked objects:
+  1004 ;;		On entry : 0/0
+  1005 ;;		On exit  : 0/0
+  1006 ;;		Unchanged: 0/0
+  1007 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1008 ;;      Params:         0       0       0       0       0       0       0
+  1009 ;;      Locals:         2       0       0       0       0       0       0
+  1010 ;;      Temps:          3       0       0       0       0       0       0
+  1011 ;;      Totals:         5       0       0       0       0       0       0
+  1012 ;;Total ram usage:        5 bytes
+  1013 ;; Hardware stack levels used:    1
+  1014 ;; Hardware stack levels required when called:    1
+  1015 ;; This function calls:
+  1016 ;;		_UART_Read
+  1017 ;;		_UART_Write
+  1018 ;; This function is called by:
+  1019 ;;		Interrupt level 2
+  1020 ;; This function uses a non-reentrant model
+  1021 ;;
+  1022                           
+  1023                           	psect	intcode
+  1024  000008                     __pintcode:
+  1025                           	callstack 0
+  1026  000008                     _high_priorty:
+  1027                           	callstack 27
+  1028                           
+  1029                           ;incstack = 0
+  1030  000008  8249               	bsf	int$flags,1,c	;set compiler interrupt flag (level 2)
+  1031  00000A  CFD9 F02A          	movff	fsr2l,??_high_priorty+1
+  1032  00000E  CFDA F02B          	movff	fsr2h,??_high_priorty+2
+  1033  000012                     
+  1034                           ;newmain.c: 168: if (RC1IF) {
+  1035  000012  AA9E               	btfss	3998,5,c	;volatile
+  1036  000014  EF0E  F000         	goto	i2u11_41
+  1037  000018  EF10  F000         	goto	i2u11_40
+  1038  00001C                     i2u11_41:
+  1039  00001C  EF1F  F000         	goto	i2l1075
+  1040  000020                     i2u11_40:
+  1041  000020                     
+  1042                           ;newmain.c: 169: RX_Buffer[RX_Count] = UART_Read();
+  1043  000020  0E01               	movlw	low _RX_Buffer
+  1044  000022  2413               	addwf	_RX_Count^0,w,c
+  1045  000024  6ED9               	movwf	fsr2l,c
+  1046  000026  0E00               	movlw	high _RX_Buffer
+  1047  000028  2014               	addwfc	(_RX_Count+1)^0,w,c
+  1048  00002A  6EDA               	movwf	fsr2h,c
+  1049  00002C  EC67  F002         	call	_UART_Read	;wreg free
+  1050  000030  6EDF               	movwf	indf2,c
+  1051  000032                     
+  1052                           ;newmain.c: 170: RX_Count++;
+  1053  000032  4A13               	infsnz	_RX_Count^0,f,c
+  1054  000034  2A14               	incf	(_RX_Count+1)^0,f,c
+  1055  000036                     
+  1056                           ;newmain.c: 171: timeoutCount = 0;
+  1057  000036  0E00               	movlw	0
+  1058  000038  6E16               	movwf	(_timeoutCount+1)^0,c
+  1059  00003A  0E00               	movlw	0
+  1060  00003C  6E15               	movwf	_timeoutCount^0,c
+  1061  00003E                     i2l1075:
+  1062                           
+  1063                           ;newmain.c: 172: };newmain.c: 174: if (TMR0IF) {
+  1064  00003E  A4F2               	btfss	4082,2,c	;volatile
+  1065  000040  EF24  F000         	goto	i2u12_41
+  1066  000044  EF26  F000         	goto	i2u12_40
+  1067  000048                     i2u12_41:
+  1068  000048  EFAB  F000         	goto	i2l169
+  1069  00004C                     i2u12_40:
+  1070  00004C                     
+  1071                           ;newmain.c: 175: TMR0IF = 0;
+  1072  00004C  94F2               	bcf	4082,2,c	;volatile
+  1073                           
+  1074                           ;newmain.c: 177: if (RCSTAbits.FERR || RCSTAbits.OERR) {
+  1075  00004E  B4AB               	btfsc	171,2,c	;volatile
+  1076  000050  EF2C  F000         	goto	i2u13_41
+  1077  000054  EF2E  F000         	goto	i2u13_40
+  1078  000058                     i2u13_41:
+  1079  000058  EF35  F000         	goto	i2l159
+  1080  00005C                     i2u13_40:
+  1081  00005C  A2AB               	btfss	171,1,c	;volatile
+  1082  00005E  EF33  F000         	goto	i2u14_41
+  1083  000062  EF35  F000         	goto	i2u14_40
+  1084  000066                     i2u14_41:
+  1085  000066  EF3A  F000         	goto	i2l1081
+  1086  00006A                     i2u14_40:
+  1087  00006A                     i2l159:
+  1088                           
+  1089                           ;newmain.c: 178: RCSTAbits.SPEN = 0;
+  1090  00006A  9EAB               	bcf	171,7,c	;volatile
+  1091                           
+  1092                           ;newmain.c: 179: TXSTAbits.TXEN = 1;
+  1093  00006C  8AAC               	bsf	172,5,c	;volatile
+  1094                           
+  1095                           ;newmain.c: 180: RCSTAbits.CREN = 1;
+  1096  00006E  88AB               	bsf	171,4,c	;volatile
+  1097                           
+  1098                           ;newmain.c: 181: TXSTAbits.SYNC = 0;
+  1099  000070  98AC               	bcf	172,4,c	;volatile
+  1100                           
+  1101                           ;newmain.c: 182: RCSTAbits.SPEN = 1;
+  1102  000072  8EAB               	bsf	171,7,c	;volatile
+  1103  000074                     i2l1081:
+  1104                           
+  1105                           ;newmain.c: 183: };newmain.c: 185: if (RX_Count >= 8) {
+  1106  000074  BE14               	btfsc	(_RX_Count+1)^0,7,c
+  1107  000076  EF46  F000         	goto	i2u15_41
+  1108  00007A  5014               	movf	(_RX_Count+1)^0,w,c
+  1109  00007C  E109               	bnz	i2u15_40
+  1110  00007E  0E08               	movlw	8
+  1111  000080  5C13               	subwf	_RX_Count^0,w,c
+  1112  000082  A0D8               	btfss	status,0,c
+  1113  000084  EF46  F000         	goto	i2u15_41
+  1114  000088  EF48  F000         	goto	i2u15_40
+  1115  00008C                     i2u15_41:
+  1116  00008C  EF72  F000         	goto	i2l1097
+  1117  000090                     i2u15_40:
+  1118  000090                     
+  1119                           ;newmain.c: 186: if (RX_Buffer[0] == address) {
+  1120  000090  5048               	movf	_address^0,w,c
+  1121  000092  1801               	xorwf	_RX_Buffer^0,w,c
+  1122  000094  A4D8               	btfss	status,2,c
+  1123  000096  EF4F  F000         	goto	i2u16_41
+  1124  00009A  EF51  F000         	goto	i2u16_40
+  1125  00009E                     i2u16_41:
+  1126  00009E  EF68  F000         	goto	i2l1093
+  1127  0000A2                     i2u16_40:
+  1128  0000A2                     
+  1129                           ;newmain.c: 188: if(RX_Buffer[1] == 3){
+  1130  0000A2  0E03               	movlw	3
+  1131  0000A4  1802               	xorwf	(_RX_Buffer+1)^0,w,c
+  1132  0000A6  A4D8               	btfss	status,2,c
+  1133  0000A8  EF58  F000         	goto	i2u17_41
+  1134  0000AC  EF5A  F000         	goto	i2u17_40
+  1135  0000B0                     i2u17_41:
+  1136  0000B0  EF61  F000         	goto	i2l1089
+  1137  0000B4                     i2u17_40:
+  1138  0000B4                     
+  1139                           ;newmain.c: 189: RX_Flag = 1;
+  1140  0000B4  8247               	bsf	(_RX_Flag/(0+8))^0,_RX_Flag& (0+7),c
+  1141                           
+  1142                           ;newmain.c: 190: RX_Length = RX_Count;
+  1143  0000B6  C013  F011         	movff	_RX_Count,_RX_Length
+  1144  0000BA  C014  F012         	movff	_RX_Count+1,_RX_Length+1
+  1145                           
+  1146                           ;newmain.c: 191: }else{
+  1147  0000BE  EF6E  F000         	goto	i2l164
+  1148  0000C2                     i2l1089:
+  1149                           
+  1150                           ;newmain.c: 192: errorCode = 1;
+  1151  0000C2  0E00               	movlw	0
+  1152  0000C4  6E10               	movwf	(_errorCode+1)^0,c
+  1153  0000C6  0E01               	movlw	1
+  1154  0000C8  6E0F               	movwf	_errorCode^0,c
+  1155  0000CA                     i2l1091:
+  1156                           
+  1157                           ;newmain.c: 193: RX_Flag = 1;
+  1158  0000CA  8247               	bsf	(_RX_Flag/(0+8))^0,_RX_Flag& (0+7),c
+  1159  0000CC  EF6E  F000         	goto	i2l164
+  1160  0000D0                     i2l1093:
+  1161                           
+  1162                           ;newmain.c: 196: else{;newmain.c: 197: errorCode= 2;
+  1163  0000D0  0E00               	movlw	0
+  1164  0000D2  6E10               	movwf	(_errorCode+1)^0,c
+  1165  0000D4  0E02               	movlw	2
+  1166  0000D6  6E0F               	movwf	_errorCode^0,c
+  1167  0000D8  EF65  F000         	goto	i2l1091
+  1168  0000DC                     i2l164:
+  1169                           
+  1170                           ;newmain.c: 199: };newmain.c: 201: RX_Count = 0;
+  1171  0000DC  0E00               	movlw	0
+  1172  0000DE  6E14               	movwf	(_RX_Count+1)^0,c
+  1173  0000E0  0E00               	movlw	0
+  1174  0000E2  6E13               	movwf	_RX_Count^0,c
+  1175  0000E4                     i2l1097:
+  1176                           
+  1177                           ;newmain.c: 202: };newmain.c: 204: if(TX_Flag && TXSTA1bits.TRMT){
+  1178  0000E4  A047               	btfss	(_TX_Flag/(0+8))^0,_TX_Flag& (0+7),c
+  1179  0000E6  EF77  F000         	goto	i2u18_41
+  1180  0000EA  EF79  F000         	goto	i2u18_40
+  1181  0000EE                     i2u18_41:
+  1182  0000EE  EFAB  F000         	goto	i2l169
+  1183  0000F2                     i2u18_40:
+  1184  0000F2  A2AC               	btfss	172,1,c	;volatile
+  1185  0000F4  EF7E  F000         	goto	i2u19_41
+  1186  0000F8  EF80  F000         	goto	i2u19_40
+  1187  0000FC                     i2u19_41:
+  1188  0000FC  EFAB  F000         	goto	i2l169
+  1189  000100                     i2u19_40:
+  1190  000100                     
+  1191                           ;newmain.c: 206: TX_Flag = 0;
+  1192  000100  9047               	bcf	(_TX_Flag/(0+8))^0,_TX_Flag& (0+7),c
+  1193  000102                     
+  1194                           ;newmain.c: 208: PORTCbits.RC5= 1;
+  1195  000102  8A82               	bsf	130,5,c	;volatile
+  1196                           
+  1197                           ;newmain.c: 209: for(i = 0; i < TX_Length; i++){
+  1198  000104  0E00               	movlw	0
+  1199  000106  6E2D               	movwf	(high_priorty@i+1)^0,c
+  1200  000108  0E00               	movlw	0
+  1201  00010A  6E2C               	movwf	high_priorty@i^0,c
+  1202  00010C  EF93  F000         	goto	i2l1111
+  1203  000110                     i2l1107:
+  1204                           
+  1205                           ;newmain.c: 210: UART_Write(TX_Buffer[i]);
+  1206  000110  0E1B               	movlw	low _TX_Buffer
+  1207  000112  242C               	addwf	high_priorty@i^0,w,c
+  1208  000114  6ED9               	movwf	fsr2l,c
+  1209  000116  0E00               	movlw	high _TX_Buffer
+  1210  000118  202D               	addwfc	(high_priorty@i+1)^0,w,c
+  1211  00011A  6EDA               	movwf	fsr2h,c
+  1212  00011C  50DF               	movf	indf2,w,c
+  1213  00011E  EC5C  F002         	call	_UART_Write
+  1214  000122  4A2C               	infsnz	high_priorty@i^0,f,c
+  1215  000124  2A2D               	incf	(high_priorty@i+1)^0,f,c
+  1216  000126                     i2l1111:
+  1217  000126  500D               	movf	_TX_Length^0,w,c
+  1218  000128  5C2C               	subwf	high_priorty@i^0,w,c
+  1219  00012A  502D               	movf	(high_priorty@i+1)^0,w,c
+  1220  00012C  0A80               	xorlw	128
+  1221  00012E  6E29               	movwf	??_high_priorty^0,c
+  1222  000130  500E               	movf	(_TX_Length+1)^0,w,c
+  1223  000132  0A80               	xorlw	128
+  1224  000134  5829               	subwfb	??_high_priorty^0,w,c
+  1225  000136  A0D8               	btfss	status,0,c
+  1226  000138  EFA0  F000         	goto	i2u20_41
+  1227  00013C  EFA2  F000         	goto	i2u20_40
+  1228  000140                     i2u20_41:
+  1229  000140  EF88  F000         	goto	i2l1107
+  1230  000144                     i2u20_40:
+  1231  000144                     
+  1232                           ;newmain.c: 211: };newmain.c: 212: PORTCbits.RC5= 0;
+  1233  000144  9A82               	bcf	130,5,c	;volatile
+  1234  000146                     
+  1235                           ;newmain.c: 213: TX_Length = 0;
+  1236  000146  0E00               	movlw	0
+  1237  000148  6E0E               	movwf	(_TX_Length+1)^0,c
+  1238  00014A  0E00               	movlw	0
+  1239  00014C  6E0D               	movwf	_TX_Length^0,c
+  1240                           
+  1241                           ;newmain.c: 214: errorCode = 0;
+  1242  00014E  0E00               	movlw	0
+  1243  000150  6E10               	movwf	(_errorCode+1)^0,c
+  1244  000152  0E00               	movlw	0
+  1245  000154  6E0F               	movwf	_errorCode^0,c
+  1246  000156                     i2l169:
+  1247  000156  C02B  FFDA         	movff	??_high_priorty+2,fsr2h
+  1248  00015A  C02A  FFD9         	movff	??_high_priorty+1,fsr2l
+  1249  00015E  9249               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
+  1250  000160  0011               	retfie		f
+  1251  000162                     __end_of_high_priorty:
+  1252                           	callstack 0
+  1253                           
+  1254 ;; *************** function _UART_Write *****************
+  1255 ;; Defined at:
+  1256 ;;		line 57 in file "newmain.c"
+  1257 ;; Parameters:    Size  Location     Type
+  1258 ;;  data            1    wreg     unsigned char 
+  1259 ;; Auto vars:     Size  Location     Type
+  1260 ;;  data            1    0[COMRAM] unsigned char 
+  1261 ;; Return value:  Size  Location     Type
+  1262 ;;                  1    wreg      void 
+  1263 ;; Registers used:
+  1264 ;;		wreg
+  1265 ;; Tracked objects:
+  1266 ;;		On entry : 0/0
+  1267 ;;		On exit  : 0/0
+  1268 ;;		Unchanged: 0/0
+  1269 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1270 ;;      Params:         0       0       0       0       0       0       0
+  1271 ;;      Locals:         1       0       0       0       0       0       0
+  1272 ;;      Temps:          0       0       0       0       0       0       0
+  1273 ;;      Totals:         1       0       0       0       0       0       0
+  1274 ;;Total ram usage:        1 bytes
+  1275 ;; Hardware stack levels used:    1
+  1276 ;; This function calls:
+  1277 ;;		Nothing
+  1278 ;; This function is called by:
+  1279 ;;		_high_priorty
+  1280 ;; This function uses a non-reentrant model
+  1281 ;;
+  1282                           
+  1283                           	psect	text5
+  1284  0004B8                     __ptext5:
+  1285                           	callstack 0
+  1286  0004B8                     _UART_Write:
+  1287                           	callstack 27
+  1288                           
+  1289                           ;incstack = 0
+  1290                           ;UART_Write@data stored from wreg
+  1291  0004B8  6E28               	movwf	UART_Write@data^0,c
+  1292  0004BA                     i2l118:
+  1293  0004BA  A89E               	btfss	3998,4,c	;volatile
+  1294  0004BC  EF62  F002         	goto	i2u2_41
+  1295  0004C0  EF64  F002         	goto	i2u2_40
+  1296  0004C4                     i2u2_41:
+  1297  0004C4  EF5D  F002         	goto	i2l118
+  1298  0004C8                     i2u2_40:
+  1299  0004C8                     
+  1300                           ;newmain.c: 60: TXREG = data;
+  1301  0004C8  C028  FFAD         	movff	UART_Write@data,4013	;volatile
+  1302  0004CC  0012               	return		;funcret
+  1303  0004CE                     __end_of_UART_Write:
+  1304                           	callstack 0
+  1305                           
+  1306 ;; *************** function _UART_Read *****************
+  1307 ;; Defined at:
+  1308 ;;		line 63 in file "newmain.c"
+  1309 ;; Parameters:    Size  Location     Type
+  1310 ;;		None
+  1311 ;; Auto vars:     Size  Location     Type
+  1312 ;;		None
+  1313 ;; Return value:  Size  Location     Type
+  1314 ;;                  1    wreg      unsigned char 
+  1315 ;; Registers used:
+  1316 ;;		wreg, status,2
+  1317 ;; Tracked objects:
+  1318 ;;		On entry : 0/0
+  1319 ;;		On exit  : 0/0
+  1320 ;;		Unchanged: 0/0
+  1321 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  1322 ;;      Params:         0       0       0       0       0       0       0
+  1323 ;;      Locals:         0       0       0       0       0       0       0
+  1324 ;;      Temps:          0       0       0       0       0       0       0
+  1325 ;;      Totals:         0       0       0       0       0       0       0
+  1326 ;;Total ram usage:        0 bytes
+  1327 ;; Hardware stack levels used:    1
+  1328 ;; This function calls:
+  1329 ;;		Nothing
+  1330 ;; This function is called by:
+  1331 ;;		_high_priorty
+  1332 ;; This function uses a non-reentrant model
+  1333 ;;
+  1334                           
+  1335                           	psect	text6
+  1336  0004CE                     __ptext6:
+  1337                           	callstack 0
+  1338  0004CE                     _UART_Read:
+  1339                           	callstack 27
+  1340  0004CE                     i2l124:
+  1341  0004CE  AA9E               	btfss	3998,5,c	;volatile
+  1342  0004D0  EF6C  F002         	goto	i2u3_41
+  1343  0004D4  EF6E  F002         	goto	i2u3_40
+  1344  0004D8                     i2u3_41:
+  1345  0004D8  EF67  F002         	goto	i2l124
+  1346  0004DC                     i2u3_40:
+  1347  0004DC                     
+  1348                           ;newmain.c: 66: return RCREG;
+  1349  0004DC  50AE               	movf	174,w,c	;volatile
+  1350  0004DE  0012               	return		;funcret
+  1351  0004E0                     __end_of_UART_Read:
+  1352                           	callstack 0
+  1353  0000                     
+  1354                           	psect	rparam
+  1355  0000                     
+  1356                           	psect	temp
+  1357  000049                     btemp:
+  1358                           	callstack 0
+  1359  000049                     	ds	1
+  1360  0000                     int$flags	set	btemp
+  1361  0000                     wtemp8	set	btemp+1
+  1362  0000                     ttemp5	set	btemp+1
+  1363  0000                     ttemp6	set	btemp+4
+  1364  0000                     ttemp7	set	btemp+8
+  1365                           
+  1366                           	psect	idloc
+  1367                           
+  1368                           ;Config register IDLOC0 @ 0x200000
+  1369                           ;	unspecified, using default values
+  1370  200000                     	org	2097152
+  1371  200000  FF                 	db	255
+  1372                           
+  1373                           ;Config register IDLOC1 @ 0x200001
+  1374                           ;	unspecified, using default values
+  1375  200001                     	org	2097153
+  1376  200001  FF                 	db	255
+  1377                           
+  1378                           ;Config register IDLOC2 @ 0x200002
+  1379                           ;	unspecified, using default values
+  1380  200002                     	org	2097154
+  1381  200002  FF                 	db	255
+  1382                           
+  1383                           ;Config register IDLOC3 @ 0x200003
+  1384                           ;	unspecified, using default values
+  1385  200003                     	org	2097155
+  1386  200003  FF                 	db	255
+  1387                           
+  1388                           ;Config register IDLOC4 @ 0x200004
+  1389                           ;	unspecified, using default values
+  1390  200004                     	org	2097156
+  1391  200004  FF                 	db	255
+  1392                           
+  1393                           ;Config register IDLOC5 @ 0x200005
+  1394                           ;	unspecified, using default values
+  1395  200005                     	org	2097157
+  1396  200005  FF                 	db	255
+  1397                           
+  1398                           ;Config register IDLOC6 @ 0x200006
+  1399                           ;	unspecified, using default values
+  1400  200006                     	org	2097158
+  1401  200006  FF                 	db	255
+  1402                           
+  1403                           ;Config register IDLOC7 @ 0x200007
+  1404                           ;	unspecified, using default values
+  1405  200007                     	org	2097159
+  1406  200007  FF                 	db	255
+  1407                           
+  1408                           	psect	config
+  1409                           
+  1410                           ; Padding undefined space
+  1411  300000                     	org	3145728
+  1412  300000  FF                 	db	255
+  1413                           
+  1414                           ;Config register CONFIG1H @ 0x300001
+  1415                           ;	Oscillator Selection bits
+  1416                           ;	FOSC = HSHP, HS oscillator (high power > 16 MHz)
+  1417                           ;	4X PLL Enable
+  1418                           ;	PLLCFG = 0x0, unprogrammed default
+  1419                           ;	Primary clock enable bit
+  1420                           ;	PRICLKEN = 0x1, unprogrammed default
+  1421                           ;	Fail-Safe Clock Monitor Enable bit
+  1422                           ;	FCMEN = 0x0, unprogrammed default
+  1423                           ;	Internal/External Oscillator Switchover bit
+  1424                           ;	IESO = 0x0, unprogrammed default
+  1425  300001                     	org	3145729
+  1426  300001  22                 	db	34
+  1427                           
+  1428                           ;Config register CONFIG2L @ 0x300002
+  1429                           ;	unspecified, using default values
+  1430                           ;	Power-up Timer Enable bit
+  1431                           ;	PWRTEN = 0x1, unprogrammed default
+  1432                           ;	Brown-out Reset Enable bits
+  1433                           ;	BOREN = 0x3, unprogrammed default
+  1434                           ;	Brown Out Reset Voltage bits
+  1435                           ;	BORV = 0x3, unprogrammed default
+  1436  300002                     	org	3145730
+  1437  300002  1F                 	db	31
+  1438                           
+  1439                           ;Config register CONFIG2H @ 0x300003
+  1440                           ;	Watchdog Timer Enable bits
+  1441                           ;	WDTEN = OFF, Watch dog timer is always disabled. SWDTEN has no effect.
+  1442                           ;	Watchdog Timer Postscale Select bits
+  1443                           ;	WDTPS = 0xF, unprogrammed default
+  1444  300003                     	org	3145731
+  1445  300003  3C                 	db	60
+  1446                           
+  1447                           ; Padding undefined space
+  1448  300004                     	org	3145732
+  1449  300004  FF                 	db	255
+  1450                           
+  1451                           ;Config register CONFIG3H @ 0x300005
+  1452                           ;	unspecified, using default values
+  1453                           ;	CCP2 MUX bit
+  1454                           ;	CCP2MX = 0x1, unprogrammed default
+  1455                           ;	PORTB A/D Enable bit
+  1456                           ;	PBADEN = 0x1, unprogrammed default
+  1457                           ;	P3A/CCP3 Mux bit
+  1458                           ;	CCP3MX = 0x1, unprogrammed default
+  1459                           ;	HFINTOSC Fast Start-up
+  1460                           ;	HFOFST = 0x1, unprogrammed default
+  1461                           ;	Timer3 Clock input mux bit
+  1462                           ;	T3CMX = 0x1, unprogrammed default
+  1463                           ;	ECCP2 B output mux bit
+  1464                           ;	P2BMX = 0x1, unprogrammed default
+  1465                           ;	MCLR Pin Enable bit
+  1466                           ;	MCLRE = 0x1, unprogrammed default
+  1467  300005                     	org	3145733
+  1468  300005  BF                 	db	191
+  1469                           
+  1470                           ;Config register CONFIG4L @ 0x300006
+  1471                           ;	unspecified, using default values
+  1472                           ;	Stack Full/Underflow Reset Enable bit
+  1473                           ;	STVREN = 0x1, unprogrammed default
+  1474                           ;	Single-Supply ICSP Enable bit
+  1475                           ;	LVP = 0x1, unprogrammed default
+  1476                           ;	Extended Instruction Set Enable bit
+  1477                           ;	XINST = 0x0, unprogrammed default
+  1478                           ;	Background Debug
+  1479                           ;	DEBUG = 0x1, unprogrammed default
+  1480  300006                     	org	3145734
+  1481  300006  85                 	db	133
+  1482                           
+  1483                           ; Padding undefined space
+  1484  300007                     	org	3145735
+  1485  300007  FF                 	db	255
+  1486                           
+  1487                           ;Config register CONFIG5L @ 0x300008
+  1488                           ;	unspecified, using default values
+  1489                           ;	Code Protection Block 0
+  1490                           ;	CP0 = 0x1, unprogrammed default
+  1491                           ;	Code Protection Block 1
+  1492                           ;	CP1 = 0x1, unprogrammed default
+  1493                           ;	Code Protection Block 2
+  1494                           ;	CP2 = 0x1, unprogrammed default
+  1495                           ;	Code Protection Block 3
+  1496                           ;	CP3 = 0x1, unprogrammed default
+  1497  300008                     	org	3145736
+  1498  300008  0F                 	db	15
+  1499                           
+  1500                           ;Config register CONFIG5H @ 0x300009
+  1501                           ;	unspecified, using default values
+  1502                           ;	Boot Block Code Protection bit
+  1503                           ;	CPB = 0x1, unprogrammed default
+  1504                           ;	Data EEPROM Code Protection bit
+  1505                           ;	CPD = 0x1, unprogrammed default
+  1506  300009                     	org	3145737
+  1507  300009  C0                 	db	192
+  1508                           
+  1509                           ;Config register CONFIG6L @ 0x30000A
+  1510                           ;	unspecified, using default values
+  1511                           ;	Write Protection Block 0
+  1512                           ;	WRT0 = 0x1, unprogrammed default
+  1513                           ;	Write Protection Block 1
+  1514                           ;	WRT1 = 0x1, unprogrammed default
+  1515                           ;	Write Protection Block 2
+  1516                           ;	WRT2 = 0x1, unprogrammed default
+  1517                           ;	Write Protection Block 3
+  1518                           ;	WRT3 = 0x1, unprogrammed default
+  1519  30000A                     	org	3145738
+  1520  30000A  0F                 	db	15
+  1521                           
+  1522                           ;Config register CONFIG6H @ 0x30000B
+  1523                           ;	unspecified, using default values
+  1524                           ;	Configuration Register Write Protection bit
+  1525                           ;	WRTC = 0x1, unprogrammed default
+  1526                           ;	Boot Block Write Protection bit
+  1527                           ;	WRTB = 0x1, unprogrammed default
+  1528                           ;	Data EEPROM Write Protection bit
+  1529                           ;	WRTD = 0x1, unprogrammed default
+  1530  30000B                     	org	3145739
+  1531  30000B  E0                 	db	224
+  1532                           
+  1533                           ;Config register CONFIG7L @ 0x30000C
+  1534                           ;	unspecified, using default values
+  1535                           ;	Table Read Protection Block 0
+  1536                           ;	EBTR0 = 0x1, unprogrammed default
+  1537                           ;	Table Read Protection Block 1
+  1538                           ;	EBTR1 = 0x1, unprogrammed default
+  1539                           ;	Table Read Protection Block 2
+  1540                           ;	EBTR2 = 0x1, unprogrammed default
+  1541                           ;	Table Read Protection Block 3
+  1542                           ;	EBTR3 = 0x1, unprogrammed default
+  1543  30000C                     	org	3145740
+  1544  30000C  0F                 	db	15
+  1545                           
+  1546                           ;Config register CONFIG7H @ 0x30000D
+  1547                           ;	unspecified, using default values
+  1548                           ;	Boot Block Table Read Protection bit
+  1549                           ;	EBTRB = 0x1, unprogrammed default
+  1550  30000D                     	org	3145741
+  1551  30000D  40                 	db	64
+  1552                           tosu	equ	0xFFF
+  1553                           tosh	equ	0xFFE
+  1554                           tosl	equ	0xFFD
+  1555                           stkptr	equ	0xFFC
+  1556                           pclatu	equ	0xFFB
+  1557                           pclath	equ	0xFFA
+  1558                           pcl	equ	0xFF9
+  1559                           tblptru	equ	0xFF8
+  1560                           tblptrh	equ	0xFF7
+  1561                           tblptrl	equ	0xFF6
+  1562                           tablat	equ	0xFF5
+  1563                           prodh	equ	0xFF4
+  1564                           prodl	equ	0xFF3
+  1565                           indf0	equ	0xFEF
+  1566                           postinc0	equ	0xFEE
+  1567                           postdec0	equ	0xFED
+  1568                           preinc0	equ	0xFEC
+  1569                           plusw0	equ	0xFEB
+  1570                           fsr0h	equ	0xFEA
+  1571                           fsr0l	equ	0xFE9
+  1572                           wreg	equ	0xFE8
+  1573                           indf1	equ	0xFE7
+  1574                           postinc1	equ	0xFE6
+  1575                           postdec1	equ	0xFE5
+  1576                           preinc1	equ	0xFE4
+  1577                           plusw1	equ	0xFE3
+  1578                           fsr1h	equ	0xFE2
+  1579                           fsr1l	equ	0xFE1
+  1580                           bsr	equ	0xFE0
+  1581                           indf2	equ	0xFDF
+  1582                           postinc2	equ	0xFDE
+  1583                           postdec2	equ	0xFDD
+  1584                           preinc2	equ	0xFDC
+  1585                           plusw2	equ	0xFDB
+  1586                           fsr2h	equ	0xFDA
+  1587                           fsr2l	equ	0xFD9
+  1588                           status	equ	0xFD8
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        1
+    BSS         39
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           94     31      72
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+
+Pointer List with Targets:
+
+    SetTheData@buf	PTR unsigned char  size(2) Largest target is 13
+		 -> TX_Buffer(COMRAM[13]), 
+
+    SetError@buf	PTR unsigned char  size(2) Largest target is 13
+		 -> TX_Buffer(COMRAM[13]), 
+
+
+Critical Paths under _main in COMRAM
+
+    _main->_SetTheData
+    _SetTheData->_SetAnalogValue
+
+Critical Paths under _high_priorty in COMRAM
+
+    _high_priorty->_UART_Write
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _high_priorty in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _high_priorty in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _high_priorty in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _high_priorty in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _high_priorty in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _high_priorty in BANK5
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                12     7      5    1102
+                                             19 COMRAM    12     7      5
+                           _SetError
+                         _SetTheData
+ ---------------------------------------------------------------------------------
+ (1) _SetTheData                                          10     4      6     485
+                                              9 COMRAM    10     4      6
+                     _SetAnalogValue
+ ---------------------------------------------------------------------------------
+ (2) _SetAnalogValue                                       3     1      2      98
+                                              6 COMRAM     3     1      2
+ ---------------------------------------------------------------------------------
+ (1) _SetError                                             4     0      4     524
+                                              6 COMRAM     4     0      4
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (3) _high_priorty                                         5     5      0      45
+                                              1 COMRAM     5     5      0
+                          _UART_Read
+                         _UART_Write
+ ---------------------------------------------------------------------------------
+ (4) _UART_Write                                           1     1      0      15
+                                              0 COMRAM     1     1      0
+ ---------------------------------------------------------------------------------
+ (4) _UART_Read                                            0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 4
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _SetError
+   _SetTheData
+     _SetAnalogValue
+
+ _high_priorty (ROOT)
+   _UART_Read
+   _UART_Write
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BIGRAM             5FF      0       0      16        0.0%
+EEDATA             100      0       0       0        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK2           100      0       0       7        0.0%
+BANK2              100      0       0       8        0.0%
+BITBANK1           100      0       0       5        0.0%
+BANK1              100      0       0       6        0.0%
+BITBANK0            A0      0       0       3        0.0%
+BANK0               A0      0       0       4        0.0%
+BITCOMRAM           5E      0       1       0        1.1%
+COMRAM              5E     1F      48       1       76.6%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+STACK                0      0       0       2        0.0%
+NULL                 0      0       0       0        0.0%
+ABS                  0      0      48       9        0.0%
+DATA                 0      0      48      17        0.0%
+CODE                 0      0       0       0        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.20 build 20200408173844 
+Symbol Table                                                                                   Tue Jul 14 11:07:29 2020
+
+       ??_SetAnalogValue 0030            ?_high_priorty 0028                      l105 04A8  
+                    l115 0464                      l108 04B6                      l133 03CA  
+                    _GIE 007F97                      u210 04B6                      u211 04B2  
+                    u220 0302                      u221 02FE                      u230 0372  
+                    u231 036E                      u240 01D0                      u241 01CC  
+                    u250 01E8                      u251 01E4                      u260 0260  
+                    u261 025C                      u270 029E                      u271 029A  
+                    u280 02CA                      u281 02C6                      wreg 000FE8  
+             _TXSTA1bits 000FAC                     l1201 03B6                     l1211 01AC  
+                   l1141 03D8                     l1221 01B6                     l1213 01AE  
+                   l1205 0166                     l1135 0494                     l1151 0424  
+                   l1143 03E8                     l1231 01D0                     l1223 01BC  
+                   l1215 01B0                     l1207 01A4                     l1137 04A6  
+                   l1153 0428                     l1145 03EC                     l1241 01EE  
+                   l1233 01D2                     l1225 01BE                     l1217 01B2  
+                   l1209 01A6                     l1171 031A                     l1155 0438  
+                   l1147 0404                     l1139 03CC                     l1251 0232  
+                   l1243 01FC                     l1235 01D6                     l1227 01C0  
+                   l1219 01B4                     l1181 0346                     l1173 031E  
+                   l1165 02F0                     l1149 0414                     l1261 0274  
+                   l1253 023E                     l1245 0200                     l1237 01E8  
+                   l1229 01C2                     l1191 038A                     l1183 0356  
+                   l1175 032E                     l1167 0302                     l1159 0440  
+                   l1271 02DE                     l1255 0242                     l1247 0206  
+                   l1239 01E8                     l1263 028C                     l1193 038E  
+                   l1177 0332                     l1169 030A                     l1185 035E  
+                   l1273 02E6                     l1265 029E                     l1257 0260  
+                   l1249 0212                     l1195 039E                     l1187 0372  
+                   l1179 0342                     l1267 02B6                     l1259 0270  
+                   l1197 03A2                     l1189 037A                     l1269 02CA  
+                   l1199 03B2                     l1295 0456                     _PEIE 007F96  
+                   _RCIE 007CED                     _RCIF 007CF5                     _RCIP 007CFD  
+                   _TXIF 007CF4                     _main 0166                     fsr2h 000FDA  
+                   indf2 000FDF                     fsr2l 000FD9                     btemp 0049  
+                   start 0162            SetError@error 0030             ___param_bank 000000  
+         ??_high_priorty 0029                    ?_main 003B                    _T0CON 000FD5  
+                  _RC1IF 007CF5                    i2l121 04CC                    i2l124 04CE  
+                  i2l118 04BA                    i2l127 04DE                    i2l164 00DC  
+                  i2l159 006A                    i2l168 0144                    i2l169 0156  
+                  i2l951 04CE                    i2l953 04DC                    i2l947 04BA  
+          SetTheData@buf 0031                    i2l949 04C8            SetTheData@idx 0039  
+                  _RCREG 000FAE                    _SPBRG 000FAF                    _PORTA 000F80  
+                  _PORTB 000F81                    _PORTC 000F82                    _PORTD 000F83  
+                  _TRISA 000F92                    _TRISB 000F93                    _TRISC 000F94  
+                  _TRISD 000F95                    _TXREG 000FAD                    _Count 0019  
+            ?_UART_Write 0028       __size_of_UART_Read 0012             main@rev_data 0043  
+                  main@i 0045           __pbitbssCOMRAM 0238                    tablat 000FF5  
+                  ttemp5 004A                    ttemp6 004D                    ttemp7 0051  
+                  status 000FD8                    wtemp8 004A          __initialization 0466  
+           __end_of_main 02F0                   ??_main 0040         __end_of_SetError 03CC  
+          __activetblptr 000002                   _ADCON0 000FC2                   _ADCON1 000FC1  
+                 _ADCON2 000FC0                   _ADRESH 000FC4                   _ADRESL 000FC3  
+                 _ANSELA 000F38                   _ANSELB 000F39                   _ANSELC 000F3A  
+                 _ANSELD 000F3B               _SetTheData 03CC                   _GODONE 007E11  
+                 i2l1101 0100                   i2l1111 0126                   i2l1103 0102  
+                 i2l1113 0146                   i2l1105 0102                   i2l1107 0110  
+                 i2l1109 0122                   i2l1071 0032                   i2l1081 0074  
+                 i2l1073 0036                   i2l1091 00CA                   i2l1083 0090  
+                 i2l1075 003E                   i2l1067 0012                   i2l1085 00A2  
+                 i2l1093 00D0                   i2l1077 004C                   i2l1069 0020  
+                 i2l1087 00B4                   i2l1079 005C                   i2l1089 00C2  
+                 i2l1097 00E4                   i2l1099 00F2                   _TMR0IE 007F95  
+                 _TMR0IF 007F92                   i2u2_40 04C8                   i2u2_41 04C4  
+                 i2u3_40 04DC                   i2u3_41 04D8            high_priorty@i 002C  
+                 _Count2 0017        __end_of_UART_Read 04E0      __size_of_UART_Write 0016  
+                 clear_0 0480             __pdataCOMRAM 0048                   tblptrh 000FF7  
+                 tblptrl 000FF6                   tblptru 000FF8     __end_of_high_priorty 0162  
+             __accesstop 0060  __end_of__initialization 0486            ___rparam_used 000001  
+            SetError@buf 002E           __pcstackCOMRAM 0028              ?_SetTheData 0031  
+              ?_SetError 002E        SetAnalogValue@chs 002E             ??_UART_Write 0028  
+                i2u11_40 0020                  i2u11_41 001C                  i2u20_40 0144  
+                i2u12_40 004C                  i2u20_41 0140                  i2u12_41 0048  
+                i2u13_40 005C                  i2u13_41 0058                  i2u14_40 006A  
+                i2u14_41 0066                  i2u15_40 0090                  i2u15_41 008C  
+                i2u16_40 00A2                  i2u16_41 009E                  i2u17_40 00B4  
+                i2u17_41 00B0                  i2u18_40 00F2                  i2u18_41 00EE  
+                i2u19_40 0100                  i2u19_41 00FC                  _RX_Flag 0239  
+                _TX_Flag 0238               ??_SetError 0032                  __Hparam 0000  
+                __Lparam 0000       __end_of_UART_Write 04CE                  _address 0048  
+    __size_of_SetTheData 009A                  __pcinit 0466                  __ramtop 0600  
+                __ptext0 0166                  __ptext1 03CC                  __ptext2 0494  
+                __ptext3 02F0                  __ptext5 04B8                  __ptext6 04CE  
+       main@recDataCount 0041  __size_of_SetAnalogValue 0024    __size_of_high_priorty 015A  
+   end_of_initialization 0486            __Lmediumconst 0000                _RCSTAbits 000FAB  
+                postinc0 000FEE             _high_priorty 0008                _UART_Read 04CE  
+              _PORTCbits 000F82           UART_Write@data 0028                _TXSTAbits 000FAC  
+              _RX_Buffer 0001                _RX_Length 0011                _TX_Buffer 001B  
+              _TX_Length 000D              _BAUDCONbits 000FB8               ?_UART_Read 0028  
+          __pidataCOMRAM 04E0      start_initialization 0466             ??_SetTheData 0037  
+      __size_of_SetError 00DC       __end_of_SetTheData 0466           _SetAnalogValue 0494  
+            __pbssCOMRAM 0001                __pintcode 0008              ??_UART_Read 0028  
+ __end_of_SetAnalogValue 04B8                _errorCode 000F         SetTheData@tx_idx 0035  
+             _ADCON0bits 000FC2          ?_SetAnalogValue 002E                 _RX_Count 0013  
+               _TX_Count 000B                 _SetError 02F0                 __Hrparam 0000  
+               __Lrparam 0000             _tempTX_Index 0009            __size_of_main 018A  
+               int$flags 0049                 main@argc 003B                 main@argv 003D  
+     SetTheData@data_num 0033                 intlevel2 0000             _timeoutCount 0015  
+             _UART_Write 04B8  
