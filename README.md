@@ -39,7 +39,7 @@ Codes are written and compiled with MPLAB IDE. You can create new projects by us
 
 #   Testing
 
-You can run the codes via the given proteus file(.). Use a virtual port emulator to creat virtual RS232 port and a virtual port terminal program to send a request to the microcontroller. 
+You can run the codes via the given proteus file (proteus_test.pdsprj). Use a virtual port emulator to creat virtual RS232 port and a virtual port terminal program to send a request to the microcontroller. 
 
 * [Virtual Serial Ports] 
 * [Realterm: Serial Terminal] 
